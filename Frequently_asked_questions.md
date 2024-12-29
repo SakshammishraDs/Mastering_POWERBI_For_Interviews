@@ -490,10 +490,149 @@ To create a custom tooltip in Power BI, follow these steps:
 
 Custom tooltips allow you to show additional context or details when users hover over a specific data point, improving the user experience.
 
+---
+## 16. **What is a surrogate key, and why do we use it in Power BI?**
+
+### **What is a Surrogate Key?**  
+A **surrogate key** is a unique identifier for a record in a database, typically used in data warehouses. Unlike business keys (e.g., Customer ID, Product Code), it is not derived from the actual business data. Instead, it is generated automatically, often as a sequential integer.
+
+---
+
+### **Why Use Surrogate Keys in Power BI?**
+
+1. **Data Integrity**  
+   - Surrogate keys ensure each record is uniquely identifiable, even when business keys change over time.  
+   - Useful in **Slowly Changing Dimensions (SCD)** scenarios to maintain data consistency.
+
+2. **Performance Optimization**  
+   - Surrogate keys are typically smaller in size (e.g., integers), making them more efficient for indexing and linking tables.  
+   - This reduces the complexity of joins and speeds up queries in Power BI.
+
+3. **Handling Changes in Business Keys**  
+   - Business keys like Customer IDs or Product Codes may change due to updates in business processes.  
+   - Surrogate keys allow such changes to occur without impacting historical data or breaking relationships in the data model.
+
+4. **Simplification of Relationships**  
+   - Surrogate keys simplify relationships between **fact** and **dimension tables**, avoiding issues like inconsistent or duplicated business keys.  
+   - They are particularly valuable when managing complex relationships in star or snowflake schemas.
+
+---
+
+### **Example:**  
+Imagine a **Customer Dimension Table** where customers occasionally change their IDs.  
+- Without a surrogate key, the relationship between the customer table and the sales fact table might break due to changes in the Customer ID.  
+- Using a surrogate key ensures that the relationship remains intact, preserving both current and historical data integrity.
+
+---
+
+### **In Summary:**  
+Surrogate keys in Power BI are crucial for:  
+- **Maintaining data integrity.**  
+- **Improving performance.**  
+- **Handling changes in business keys.**  
+- **Simplifying data model relationships.**
+
+By using surrogate keys, you create a more robust, scalable, and efficient data model.
 
 
+---
+
+## 17. **How can you change the order of the values displayed on the X-axis of a Column chart as per the requirement?**
+
+Changing the order of values on the X-axis in Power BI’s Column chart is straightforward and depends on the type of data and desired order. Below are the steps:
+
+---
+
+### **1. Manual Sorting (Categorical Data):**  
+If the X-axis is categorical (e.g., Product Category, Region, or Year), you can sort the categories alphabetically or in a custom order.  
+
+- **Alphabetical Order:**  
+  - Click on the dropdown arrow next to the field in the **Fields pane**.  
+  - Select **Sort Ascending** or **Sort Descending** to reorder the categories alphabetically.  
+
+- **Custom Order:**  
+  - Create a **Sort Order** column in your data model with numeric values (e.g., `1` for January, `2` for February, etc.).  
+  - Use the **Sort by Column** feature to sort the X-axis field by this new column.  
+
+---
+
+### **2. Sorting by a Measure (Numerical Data):**  
+For numerical X-axis values, you can sort the categories based on a measure (e.g., Sales, Profit).  
+
+- In the **Visualizations pane**, click on the ellipsis (**...**) for the X-axis field.  
+- Select **Sort by Measure** and choose the desired measure.  
+- You can further specify **ascending** or **descending** order.
+
+---
+
+### **3. Sorting by Date (Time-Based Data):**  
+For time-based X-axis values (e.g., Dates, Months, Years):  
+
+- **Chronological Order:**  
+  Power BI automatically sorts dates in chronological order if recognized as a date field.  
+
+- **Text-Based Dates (e.g., Month Names):**  
+  - Create a **Date Column** in your data (e.g., `2024-01-01` for January).  
+  - Use the **Sort by Column** feature to sort the text-based field (e.g., Month) by the Date column.  
+
+---
+
+### **Summary:**  
+- **Categorical Data:** Sort alphabetically or by a custom column.  
+- **Numerical Data:** Sort by a measure.  
+- **Time-Based Data:** Ensure the date is properly recognized, then sort by the Date column.  
+
+This flexibility allows you to customize the X-axis order based on the insights you want to highlight effectively.
 
 
+---
+
+## 18. **How do you handle performance optimization in Power BI?**
+
+To optimize performance in Power BI, I follow several best practices to ensure fast report loading and a seamless user experience. Below are the key strategies:
+
+---
+
+### **1. Data Model Optimization:**  
+- Use a **star schema** for better data structure and relationships.  
+- Remove **unnecessary columns** to reduce the data model size.  
+- Set correct **data types** to improve processing efficiency.
+
+---
+
+### **2. Reduce Data Size:**  
+- Apply **filters in Power Query** to load only relevant data.  
+- Use **aggregated tables** for large datasets to speed up performance.  
+
+---
+
+### **3. Use Import Mode or DirectQuery Appropriately:**  
+- Prefer **Import Mode** for better performance when dealing with smaller datasets.  
+- Use **DirectQuery** for large, real-time data but optimize queries.  
+- Implement **Incremental Refresh** for efficient data refresh processes.  
+
+---
+
+### **4. Optimize DAX Calculations:**  
+- Avoid complex DAX expressions in slicers or filters.  
+- Use **simple aggregation functions** and **variables** in measures for improved performance.  
+
+---
+
+### **5. Visual Optimization:**  
+- Limit the number of visuals per report page to reduce rendering time.  
+- Avoid using **high-cardinality fields** in visuals, as they can slow down performance.  
+
+---
+
+### **6. Query Folding and Indexing:**  
+- Ensure **query folding** in Power Query for efficient data processing at the source.  
+- Set up proper **indexes** on frequently queried columns in the data source to improve query performance.  
+
+---
+
+### **Summary:**  
+By optimizing the data model, reducing data size, balancing import vs. direct query modes, improving DAX calculations, optimizing visuals, and leveraging query folding and indexing, I ensure that Power BI reports are efficient and deliver a smooth user experience.
 
 
 
